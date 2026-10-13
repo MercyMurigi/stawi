@@ -1,3 +1,4 @@
+import { MoneyFlow } from "@/components/sim/MoneyFlow";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -114,6 +115,7 @@ function Overview() {
         description="Everything moving through your co-op this season."
         action={<NewInvoiceSheet type="coop" coopId={coopId} />}
       />
+      <MoneyFlow />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {m && shown ? (

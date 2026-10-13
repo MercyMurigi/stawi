@@ -50,7 +50,7 @@ const readRequestUrl = createIsomorphicFn()
   .client(() => window.location.href);
 
 export function configuredSiteUrl(): string | undefined {
-  const raw = (import.meta.env.VITE_SITE_URL as string | undefined)?.trim();
+  const raw = (import.meta.env["VITE_SITE_URL"] as string | undefined)?.trim();
   if (!raw) return undefined;
   try {
     return new URL(raw).origin;
@@ -88,8 +88,7 @@ export function shouldNoindex(): boolean {
 type HeadMeta =
   | { title: string }
   | { name: string; content: string }
-  | { property: string; content: string }
-  | { "script:ld+json": Record<string, unknown> };
+  | { property: string; content: string };
 
 type HeadLink = { rel: string; href: string; type?: string };
 
@@ -166,7 +165,7 @@ export function structuredData(origin: string): Record<string, unknown> {
   };
 }
 
-export function homeHead(): { meta: HeadMeta[]; links: HeadLink[] } {
+export function homeHead(): { meta: HeadMeta[]; links: HeadLink[]; scripts: { type: string; children: string }[] } {
   const origin = publicOrigin();
   const image = ogImageUrl(origin);
   const meta: HeadMeta[] = [
@@ -184,11 +183,11 @@ export function homeHead(): { meta: HeadMeta[]; links: HeadLink[] } {
     { name: "twitter:title", content: SITE_TITLE },
     { name: "twitter:description", content: OG_DESCRIPTION },
     { name: "twitter:image", content: image },
-    { "script:ld+json": structuredData(origin) },
   ];
   if (shouldNoindex()) meta.push(noindexMeta);
   return {
     meta,
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(structuredData(origin)) }],
     links: [
       { rel: "canonical", href: `${origin}/` },
       { rel: "alternate", href: `${origin}/index.md`, type: "text/markdown" },

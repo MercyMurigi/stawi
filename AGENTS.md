@@ -21,6 +21,7 @@ Leave the managed block above unchanged.
 - Ask Stawi mounts once in the co-op layout as a floating modal so its conversation survives co-op navigation.
 - PWA registration stays in `src/lib/pwa.client.ts`; it is disabled in development and Lovable previews to prevent stale preview caches.
 - Live mode comes from root `.env`; sessions are kept per browser tab.
+- Stablecoin settlement, financing and onchain records are a browser-only simulation in `src/lib/sim/store.ts`; chain calls go through the `ChainAdapter` in `src/lib/chain.ts` so a real network can replace it without touching pages, and simulation data never mixes with live API data.
 - Lovable edits frontend files only, not `backend/` or `docs/`.
 
 ## Other coding agents

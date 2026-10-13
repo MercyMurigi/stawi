@@ -1,9 +1,12 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 import {
+  Coins,
   FileBarChart,
   FileText,
+  HandCoins,
   Landmark,
   LayoutDashboard,
+  ScrollText,
   Settings,
   Ship,
   Users,
@@ -11,6 +14,8 @@ import {
 } from "lucide-react";
 import { RoleGate } from "@/components/stawi/RoleGate";
 import { AskStawiChat } from "@/components/stawi/AskStawiChat";
+import { SimBadge } from "@/components/sim/SimUi";
+import { SimulationPanel } from "@/components/sim/SimulationPanel";
 import { DashboardShell } from "@/features/shared/DashboardShell";
 import { noindexMeta } from "@/lib/site";
 
@@ -41,6 +46,7 @@ function CoopLayout() {
       <DashboardShell
         title="Kiambu Highlands Coffee Co-op"
         subtitle="Treasurer"
+        badge={<SimBadge />}
         nav={[
           { to: "/coop/overview", label: "Overview", icon: LayoutDashboard },
           { to: "/coop/shipments", label: "Shipments", icon: Ship },
@@ -48,12 +54,16 @@ function CoopLayout() {
           { to: "/coop/members", label: "Members", icon: Users },
           { to: "/coop/payments", label: "Buyer payments", icon: Landmark },
           { to: "/coop/payouts", label: "Payouts", icon: Wallet },
+          { to: "/coop/settlements", label: "Settlements", icon: Coins },
+          { to: "/coop/financing", label: "Financing", icon: HandCoins },
+          { to: "/coop/records", label: "Payout records", icon: ScrollText },
           { to: "/coop/reports", label: "Reports & tax", icon: FileBarChart },
           { to: "/coop/settings", label: "Settings", icon: Settings },
         ]}
       >
         <Outlet />
       </DashboardShell>
+      <SimulationPanel />
       <AskStawiChat />
     </RoleGate>
   );
