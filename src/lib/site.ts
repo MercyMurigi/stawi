@@ -50,7 +50,7 @@ const readRequestUrl = createIsomorphicFn()
   .client(() => window.location.href);
 
 export function configuredSiteUrl(): string | undefined {
-  const raw = (import.meta.env.VITE_SITE_URL as string | undefined)?.trim();
+  const raw = (import.meta.env["VITE_SITE_URL"] as string | undefined)?.trim();
   if (!raw) return undefined;
   try {
     return new URL(raw).origin;
