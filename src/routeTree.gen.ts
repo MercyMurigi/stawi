@@ -27,12 +27,15 @@ import { Route as AppProfileRouteImport } from './routes/app.profile'
 import { Route as AppWithdrawRouteImport } from './routes/app.withdraw'
 import { Route as CoopIndexRouteImport } from './routes/coop.index'
 import { Route as CoopAssistantRouteImport } from './routes/coop.assistant'
+import { Route as CoopFinancingRouteImport } from './routes/coop.financing'
 import { Route as CoopMembersRouteImport } from './routes/coop.members'
 import { Route as CoopOverviewRouteImport } from './routes/coop.overview'
 import { Route as CoopPaymentsRouteImport } from './routes/coop.payments'
 import { Route as CoopPayoutsRouteImport } from './routes/coop.payouts'
+import { Route as CoopRecordsRouteImport } from './routes/coop.records'
 import { Route as CoopReportsRouteImport } from './routes/coop.reports'
 import { Route as CoopSettingsRouteImport } from './routes/coop.settings'
+import { Route as CoopSettlementsRouteImport } from './routes/coop.settlements'
 import { Route as CoopShipmentsRouteImport } from './routes/coop.shipments'
 import { Route as DemoUssdRouteImport } from './routes/demo.ussd'
 import { Route as DirectIndexRouteImport } from './routes/direct.index'
@@ -41,6 +44,7 @@ import { Route as DirectPaymentsRouteImport } from './routes/direct.payments'
 import { Route as DirectSettingsRouteImport } from './routes/direct.settings'
 import { Route as DirectShipmentsRouteImport } from './routes/direct.shipments'
 import { Route as PayInvoiceIdRouteImport } from './routes/pay.$invoiceId'
+import { Route as ReceiptTxHashRouteImport } from './routes/receipt.$txHash'
 import { Route as CoopInvoicesIndexRouteImport } from './routes/coop.invoices.index'
 import { Route as CoopInvoicesIdRouteImport } from './routes/coop.invoices.$id'
 import { Route as DirectInvoicesIndexRouteImport } from './routes/direct.invoices.index'
@@ -136,6 +140,11 @@ const CoopAssistantRoute = CoopAssistantRouteImport.update({
   path: '/assistant',
   getParentRoute: () => CoopRoute,
 } as any)
+const CoopFinancingRoute = CoopFinancingRouteImport.update({
+  id: '/financing',
+  path: '/financing',
+  getParentRoute: () => CoopRoute,
+} as any)
 const CoopMembersRoute = CoopMembersRouteImport.update({
   id: '/members',
   path: '/members',
@@ -156,6 +165,11 @@ const CoopPayoutsRoute = CoopPayoutsRouteImport.update({
   path: '/payouts',
   getParentRoute: () => CoopRoute,
 } as any)
+const CoopRecordsRoute = CoopRecordsRouteImport.update({
+  id: '/records',
+  path: '/records',
+  getParentRoute: () => CoopRoute,
+} as any)
 const CoopReportsRoute = CoopReportsRouteImport.update({
   id: '/reports',
   path: '/reports',
@@ -164,6 +178,11 @@ const CoopReportsRoute = CoopReportsRouteImport.update({
 const CoopSettingsRoute = CoopSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => CoopRoute,
+} as any)
+const CoopSettlementsRoute = CoopSettlementsRouteImport.update({
+  id: '/settlements',
+  path: '/settlements',
   getParentRoute: () => CoopRoute,
 } as any)
 const CoopShipmentsRoute = CoopShipmentsRouteImport.update({
@@ -206,6 +225,11 @@ const PayInvoiceIdRoute = PayInvoiceIdRouteImport.update({
   path: '/pay/$invoiceId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReceiptTxHashRoute = ReceiptTxHashRouteImport.update({
+  id: '/receipt/$txHash',
+  path: '/receipt/$txHash',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CoopInvoicesIndexRoute = CoopInvoicesIndexRouteImport.update({
   id: '/invoices/',
   path: '/invoices/',
@@ -244,12 +268,15 @@ export interface FileRoutesByFullPath {
   '/app/profile': typeof AppProfileRoute
   '/app/withdraw': typeof AppWithdrawRoute
   '/coop/assistant': typeof CoopAssistantRoute
+  '/coop/financing': typeof CoopFinancingRoute
   '/coop/members': typeof CoopMembersRoute
   '/coop/overview': typeof CoopOverviewRoute
   '/coop/payments': typeof CoopPaymentsRoute
   '/coop/payouts': typeof CoopPayoutsRoute
+  '/coop/records': typeof CoopRecordsRoute
   '/coop/reports': typeof CoopReportsRoute
   '/coop/settings': typeof CoopSettingsRoute
+  '/coop/settlements': typeof CoopSettlementsRoute
   '/coop/shipments': typeof CoopShipmentsRoute
   '/demo/ussd': typeof DemoUssdRoute
   '/direct/overview': typeof DirectOverviewRoute
@@ -257,6 +284,7 @@ export interface FileRoutesByFullPath {
   '/direct/settings': typeof DirectSettingsRoute
   '/direct/shipments': typeof DirectShipmentsRoute
   '/pay/$invoiceId': typeof PayInvoiceIdRoute
+  '/receipt/$txHash': typeof ReceiptTxHashRoute
   '/app/': typeof AppIndexRoute
   '/coop/': typeof CoopIndexRoute
   '/direct/': typeof DirectIndexRoute
@@ -279,12 +307,15 @@ export interface FileRoutesByTo {
   '/app/profile': typeof AppProfileRoute
   '/app/withdraw': typeof AppWithdrawRoute
   '/coop/assistant': typeof CoopAssistantRoute
+  '/coop/financing': typeof CoopFinancingRoute
   '/coop/members': typeof CoopMembersRoute
   '/coop/overview': typeof CoopOverviewRoute
   '/coop/payments': typeof CoopPaymentsRoute
   '/coop/payouts': typeof CoopPayoutsRoute
+  '/coop/records': typeof CoopRecordsRoute
   '/coop/reports': typeof CoopReportsRoute
   '/coop/settings': typeof CoopSettingsRoute
+  '/coop/settlements': typeof CoopSettlementsRoute
   '/coop/shipments': typeof CoopShipmentsRoute
   '/demo/ussd': typeof DemoUssdRoute
   '/direct/overview': typeof DirectOverviewRoute
@@ -292,6 +323,7 @@ export interface FileRoutesByTo {
   '/direct/settings': typeof DirectSettingsRoute
   '/direct/shipments': typeof DirectShipmentsRoute
   '/pay/$invoiceId': typeof PayInvoiceIdRoute
+  '/receipt/$txHash': typeof ReceiptTxHashRoute
   '/app': typeof AppIndexRoute
   '/coop': typeof CoopIndexRoute
   '/direct': typeof DirectIndexRoute
@@ -318,12 +350,15 @@ export interface FileRoutesById {
   '/app/profile': typeof AppProfileRoute
   '/app/withdraw': typeof AppWithdrawRoute
   '/coop/assistant': typeof CoopAssistantRoute
+  '/coop/financing': typeof CoopFinancingRoute
   '/coop/members': typeof CoopMembersRoute
   '/coop/overview': typeof CoopOverviewRoute
   '/coop/payments': typeof CoopPaymentsRoute
   '/coop/payouts': typeof CoopPayoutsRoute
+  '/coop/records': typeof CoopRecordsRoute
   '/coop/reports': typeof CoopReportsRoute
   '/coop/settings': typeof CoopSettingsRoute
+  '/coop/settlements': typeof CoopSettlementsRoute
   '/coop/shipments': typeof CoopShipmentsRoute
   '/demo/ussd': typeof DemoUssdRoute
   '/direct/overview': typeof DirectOverviewRoute
@@ -331,6 +366,7 @@ export interface FileRoutesById {
   '/direct/settings': typeof DirectSettingsRoute
   '/direct/shipments': typeof DirectShipmentsRoute
   '/pay/$invoiceId': typeof PayInvoiceIdRoute
+  '/receipt/$txHash': typeof ReceiptTxHashRoute
   '/app/': typeof AppIndexRoute
   '/coop/': typeof CoopIndexRoute
   '/direct/': typeof DirectIndexRoute
@@ -358,12 +394,15 @@ export interface FileRouteTypes {
     | '/app/profile'
     | '/app/withdraw'
     | '/coop/assistant'
+    | '/coop/financing'
     | '/coop/members'
     | '/coop/overview'
     | '/coop/payments'
     | '/coop/payouts'
+    | '/coop/records'
     | '/coop/reports'
     | '/coop/settings'
+    | '/coop/settlements'
     | '/coop/shipments'
     | '/demo/ussd'
     | '/direct/overview'
@@ -371,6 +410,7 @@ export interface FileRouteTypes {
     | '/direct/settings'
     | '/direct/shipments'
     | '/pay/$invoiceId'
+    | '/receipt/$txHash'
     | '/app/'
     | '/coop/'
     | '/direct/'
@@ -393,12 +433,15 @@ export interface FileRouteTypes {
     | '/app/profile'
     | '/app/withdraw'
     | '/coop/assistant'
+    | '/coop/financing'
     | '/coop/members'
     | '/coop/overview'
     | '/coop/payments'
     | '/coop/payouts'
+    | '/coop/records'
     | '/coop/reports'
     | '/coop/settings'
+    | '/coop/settlements'
     | '/coop/shipments'
     | '/demo/ussd'
     | '/direct/overview'
@@ -406,6 +449,7 @@ export interface FileRouteTypes {
     | '/direct/settings'
     | '/direct/shipments'
     | '/pay/$invoiceId'
+    | '/receipt/$txHash'
     | '/app'
     | '/coop'
     | '/direct'
@@ -431,12 +475,15 @@ export interface FileRouteTypes {
     | '/app/profile'
     | '/app/withdraw'
     | '/coop/assistant'
+    | '/coop/financing'
     | '/coop/members'
     | '/coop/overview'
     | '/coop/payments'
     | '/coop/payouts'
+    | '/coop/records'
     | '/coop/reports'
     | '/coop/settings'
+    | '/coop/settlements'
     | '/coop/shipments'
     | '/demo/ussd'
     | '/direct/overview'
@@ -444,6 +491,7 @@ export interface FileRouteTypes {
     | '/direct/settings'
     | '/direct/shipments'
     | '/pay/$invoiceId'
+    | '/receipt/$txHash'
     | '/app/'
     | '/coop/'
     | '/direct/'
@@ -467,6 +515,7 @@ export interface RootRouteChildren {
   ApiCoopAssistantRoute: typeof ApiCoopAssistantRoute
   DemoUssdRoute: typeof DemoUssdRoute
   PayInvoiceIdRoute: typeof PayInvoiceIdRoute
+  ReceiptTxHashRoute: typeof ReceiptTxHashRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -597,6 +646,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoopAssistantRouteImport
       parentRoute: typeof CoopRoute
     }
+    '/coop/financing': {
+      id: '/coop/financing'
+      path: '/financing'
+      fullPath: '/coop/financing'
+      preLoaderRoute: typeof CoopFinancingRouteImport
+      parentRoute: typeof CoopRoute
+    }
     '/coop/members': {
       id: '/coop/members'
       path: '/members'
@@ -625,6 +681,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoopPayoutsRouteImport
       parentRoute: typeof CoopRoute
     }
+    '/coop/records': {
+      id: '/coop/records'
+      path: '/records'
+      fullPath: '/coop/records'
+      preLoaderRoute: typeof CoopRecordsRouteImport
+      parentRoute: typeof CoopRoute
+    }
     '/coop/reports': {
       id: '/coop/reports'
       path: '/reports'
@@ -637,6 +700,13 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/coop/settings'
       preLoaderRoute: typeof CoopSettingsRouteImport
+      parentRoute: typeof CoopRoute
+    }
+    '/coop/settlements': {
+      id: '/coop/settlements'
+      path: '/settlements'
+      fullPath: '/coop/settlements'
+      preLoaderRoute: typeof CoopSettlementsRouteImport
       parentRoute: typeof CoopRoute
     }
     '/coop/shipments': {
@@ -695,6 +765,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PayInvoiceIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/receipt/$txHash': {
+      id: '/receipt/$txHash'
+      path: '/receipt/$txHash'
+      fullPath: '/receipt/$txHash'
+      preLoaderRoute: typeof ReceiptTxHashRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/coop/invoices/': {
       id: '/coop/invoices/'
       path: '/invoices'
@@ -746,12 +823,15 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 interface CoopRouteChildren {
   CoopAssistantRoute: typeof CoopAssistantRoute
+  CoopFinancingRoute: typeof CoopFinancingRoute
   CoopMembersRoute: typeof CoopMembersRoute
   CoopOverviewRoute: typeof CoopOverviewRoute
   CoopPaymentsRoute: typeof CoopPaymentsRoute
   CoopPayoutsRoute: typeof CoopPayoutsRoute
+  CoopRecordsRoute: typeof CoopRecordsRoute
   CoopReportsRoute: typeof CoopReportsRoute
   CoopSettingsRoute: typeof CoopSettingsRoute
+  CoopSettlementsRoute: typeof CoopSettlementsRoute
   CoopShipmentsRoute: typeof CoopShipmentsRoute
   CoopIndexRoute: typeof CoopIndexRoute
   CoopInvoicesIdRoute: typeof CoopInvoicesIdRoute
@@ -760,12 +840,15 @@ interface CoopRouteChildren {
 
 const CoopRouteChildren: CoopRouteChildren = {
   CoopAssistantRoute: CoopAssistantRoute,
+  CoopFinancingRoute: CoopFinancingRoute,
   CoopMembersRoute: CoopMembersRoute,
   CoopOverviewRoute: CoopOverviewRoute,
   CoopPaymentsRoute: CoopPaymentsRoute,
   CoopPayoutsRoute: CoopPayoutsRoute,
+  CoopRecordsRoute: CoopRecordsRoute,
   CoopReportsRoute: CoopReportsRoute,
   CoopSettingsRoute: CoopSettingsRoute,
+  CoopSettlementsRoute: CoopSettlementsRoute,
   CoopShipmentsRoute: CoopShipmentsRoute,
   CoopIndexRoute: CoopIndexRoute,
   CoopInvoicesIdRoute: CoopInvoicesIdRoute,
@@ -811,6 +894,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiCoopAssistantRoute: ApiCoopAssistantRoute,
   DemoUssdRoute: DemoUssdRoute,
   PayInvoiceIdRoute: PayInvoiceIdRoute,
+  ReceiptTxHashRoute: ReceiptTxHashRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

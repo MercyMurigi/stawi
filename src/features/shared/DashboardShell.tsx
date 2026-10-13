@@ -64,6 +64,7 @@ export function DashboardShell({
       <div className="min-w-0 flex-1">
         <nav className="flex items-center gap-1 overflow-x-auto border-b border-border px-3 py-2 md:hidden">
           <AccountSwitcher className="mr-2 flex shrink-0 items-center gap-2 text-xs text-muted-foreground" />
+          {badge && <span className="mr-2 shrink-0">{badge}</span>}
           {nav.map((n) => (
             <Link
               key={n.to}
